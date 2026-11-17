@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从口播稿、逐字稿或文章中提取适合开头、标题和收尾的原句。">
+  <meta name="theme-color" content="#f8f8f1">
+  <title>金句提取器</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="extractor.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="frame header-content">
+      <div class="wordmark"><span class="mark" aria-hidden="true">“</span>金句提取器</div>
+      <div class="privacy"><i aria-hidden="true"></i>原文在浏览器内处理</div>
+    </div>
+  </header>
+
+  <main class="frame">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">金句<span>提取器</span></h1>
+      <p>从口播稿、访谈逐字稿或文章里，挑出能当标题、开头和收尾的原句。</p>
+    </section>
+
+    <form id="extract-form" class="workspace">
+      <section class="panel editor" aria-labelledby="input-title">
+        <div class="panel-heading">
+          <h2 id="input-title"><label for="source">原文</label></h2>
+          <div class="editor-actions">
+            <button id="example" class="quiet" type="button">试用示例</button>
+            <button id="clear" class="quiet" type="button" disabled>清空</button>
+          </div>
+        </div>
+        <textarea id="source" placeholder="把原文粘贴到这里…" aria-describedby="input-info" spellcheck="false"></textarea>
+        <div class="editor-footer">
+          <div id="input-info" class="input-info">
+            <span id="character-count">0 / 50,000 字</span>
+            <kbd id="shortcut">⌘ ↵</kbd>
+          </div>
+          <div class="controls">
+            <label for="limit" class="visually-hidden">提取条数</label>
+            <select id="limit" title="提取条数">
+              <option value="3">3 条</option>
+              <option value="5" selected>5 条</option>
+              <option value="8">8 条</option>
+              <option value="12">12 条</option>
+            </select>
+            <button id="extract" class="primary" type="submit">提取金句 <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+        <p id="input-error" class="input-error" role="status" hidden></p>
+      </section>
+
+      <section class="panel output" aria-labelledby="output-title">
+        <div class="panel-heading">
+          <h2 id="output-title">提取结果</h2>
+          <button id="copy-all" class="quiet" type="button" disabled>复制全部</button>
+        </div>
+        <div id="modes" class="modes" role="group" aria-label="句子用途">
+          <button type="button" data-mode="all" aria-pressed="true">综合</button>
+          <button type="button" data-mode="hook" aria-pressed="false">开头</button>
+          <button type="button" data-mode="title" aria-pressed="false">标题</button>
+          <button type="button" data-mode="close" aria-pressed="false">收尾</button>
+        </div>
+        <div id="empty" class="empty">
+          <div class="quote-symbol" aria-hidden="true">“</div>
+          <p id="empty-message">粘贴原文后，点击「提取金句」。</p>
+        </div>
+        <ul id="results" class="results" aria-label="提取的原句" hidden></ul>
+        <p id="result-status" class="result-status" role="status"></p>
+      </section>
+    </form>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
+
